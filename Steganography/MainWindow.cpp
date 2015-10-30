@@ -24,7 +24,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    SteganographyWindow extraWindow ;
+    ExtractWindow extraWindow ;
     extraWindow.setModal(true) ;
     extraWindow.exec() ;
 }

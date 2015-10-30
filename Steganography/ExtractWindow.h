@@ -15,6 +15,13 @@ public:
     explicit ExtractWindow(QWidget *parent = 0);
     ~ExtractWindow();
 
+private slots:
+    void on_StegoPushButton_clicked();
+
+    void on_SavePushButton_clicked();
+
+    void on_buttonBox_accepted();
+
 private:
     Ui::ExtractWindow *ui;
 };

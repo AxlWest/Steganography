@@ -10,6 +10,18 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -29,7 +41,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="StegoLineEdit">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -39,7 +51,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="SaveLineEdit">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -49,7 +61,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="StegoPushButton">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -62,7 +74,7 @@
     <string>Browse</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="SavePushButton">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -75,7 +87,7 @@
     <string>Browse</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="StegoComboBox">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -111,14 +123,37 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>100</x>
      <y>120</y>
-     <width>101</width>
+     <width>141</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Text Save Location</string>
+    <string>Text Save Location (optional)</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="NameLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>201</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Text File Save Name (optional)</string>
    </property>
   </widget>
  </widget>

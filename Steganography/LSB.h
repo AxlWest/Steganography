@@ -9,8 +9,8 @@ class LSB
 		LSB(void) ; //Constructor
 		~LSB(void) ; //Destructor
 
-		ImageFile* proformSteganography(ImageFile* image , char* messagePathway) ;
-		void extractSteganography(ImageFile* image , char* messageFileName) ;
+        ImageFile* proformSteganography(ImageFile* image , const char* messagePathway) ;
+        void extractSteganography(ImageFile* image , const char* messageFileName) ;
 
 		bool prayItFits(unsigned int imageSize , unsigned int textSize) ;
 } ;

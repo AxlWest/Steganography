@@ -15,17 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         MainWindow.cpp \
     SteganographyWindow.cpp \
-    ExtractWindow.cpp \
-    LSB.cpp \
-    ImageFile.cpp \
-    Bitmap.cpp
+    ExtractWindow.cpp
 
 HEADERS  += MainWindow.h \
     SteganographyWindow.h \
     ExtractWindow.h \
-    LSB.h \
-    ImageFile.h \
-    Bitmap.h
+    LSB.h
 
 FORMS    += MainWindow.ui \
     SteganographyWindow.ui \

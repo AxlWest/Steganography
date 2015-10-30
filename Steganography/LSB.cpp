@@ -12,7 +12,7 @@ LSB::~LSB(void)
 {
 }
 
-ImageFile* LSB::proformSteganography(ImageFile* image , char* messagePathway)
+ImageFile* LSB::proformSteganography(ImageFile* image , const char *messagePathway)
 {
 	FILE* file = NULL ;
 	unsigned int k = 0 ;
@@ -252,7 +252,7 @@ ImageFile* LSB::proformSteganography(ImageFile* image , char* messagePathway)
 	return image ;
 }
 
-void LSB::extractSteganography(ImageFile* image , char* messageFileName)
+void LSB::extractSteganography(ImageFile* image , const char *messageFileName)
 {
 	FILE* file = NULL ;
 	unsigned char* textData = NULL ;
@@ -369,7 +369,7 @@ void LSB::extractSteganography(ImageFile* image , char* messageFileName)
 		file = fopen("ExtractedMessage.txt" , "wb") ;
 	}
 
-	fwrite(textData , sizeof(unsigned char) , 100 , file) ;
+    fwrite(textData , sizeof(unsigned char) , image->getImageSize() , file) ;
 
 	fclose(file) ;
 }

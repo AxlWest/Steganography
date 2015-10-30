@@ -2,6 +2,7 @@
 #define STEGANOGRAPHYWINDOW_H
 
 #include <QDialog>
+#include "LSB.h"
 
 namespace Ui {
 class SteganographyWindow;
@@ -14,6 +15,15 @@ class SteganographyWindow : public QDialog
 public:
     explicit SteganographyWindow(QWidget *parent = 0);
     ~SteganographyWindow();
+
+private slots:
+    void on_StegoBrowseButton_clicked();
+
+    void on_TextBrowseButton_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_buttonBox_accepted();
 
 private:
     Ui::SteganographyWindow *ui;
