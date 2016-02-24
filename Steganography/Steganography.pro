@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     ExtractWindow.cpp \
     LSB.cpp \
     ImageFile.cpp \
-    Bitmap.cpp
+    Bitmap.cpp \
+    LSB_1_2_3.cpp
 
 HEADERS  += MainWindow.h \
     SteganographyWindow.h \
     ExtractWindow.h \
     LSB.h \
     ImageFile.h \
-    Bitmap.h
+    Bitmap.h \
+    LSB_1_2_3.h
 
 FORMS    += MainWindow.ui \
     SteganographyWindow.ui \

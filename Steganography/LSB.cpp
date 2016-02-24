@@ -39,207 +39,207 @@ ImageFile* LSB::proformSteganography(ImageFile* image , const char *messagePathw
 
 	imageData = image->getImage() ;
 
-	for(int i = 0 ; i < fileSize ; i++)
+    for(int i = 0 ; i < fileSize ; i++) //Each loop hides one letter in 8 LSB's
 	{
-		if(textData[i] & 128)
+        if(textData[i] & 128) //Is the first Bit a 1
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is also a 1
 			{
-				//Already a 1
+                //Already a 1 do nothing
 			}
-			else
+            else //RGB LSB is a 0
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
 		}
-		else
+        else //Bit is a 0
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is a 1
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
-			else
+            else //RGB LSB is also a 0
 			{
-				//Already a 0
-			}
-		}
-
-		k++ ;
-
-		if(textData[i] & 64)
-		{
-			if(imageData[k] & 1)
-			{
-				//Already a 1
-			}
-			else
-			{
-				imageData[k] ^= 1 << 0 ;
-			}
-		}
-		else
-		{
-			if(imageData[k] & 1)
-			{
-				imageData[k] ^= 1 << 0 ;
-			}
-			else
-			{
-				//Already a 0
+                //Already a 0 do nothing
 			}
 		}
 
-		k++ ;
+        k++ ; //Next RGB byte
 
-		if(textData[i] & 32)
+        if(textData[i] & 64) //Is the second Bit a 1
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is also a 1
 			{
-				//Already a 1
+                //Already a 1 do nothing
 			}
-			else
+            else //RGB LSB is a 0
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
 		}
-		else
+        else //Bit is a 0
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is a 1
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
-			else
+            else //RGB LSB is also a 0
 			{
-				//Already a 0
+                //Already a 0 do nothing
 			}
 		}
 
-		k++ ;
+        k++ ; //Next RGB byte
 
-		if(textData[i] & 16)
+        if(textData[i] & 32) //Is the third Bit a 1
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is also a 1
 			{
-				//Already a 1
+                //Already a 1 do nothing
 			}
-			else
-			{
-				imageData[k] ^= 1 << 0 ;
-			}
-		}
-		else
-		{
-			if(imageData[k] & 1)
-			{
-				imageData[k] ^= 1 << 0 ;
-			}
-			else
-			{
-				//Already a 0
-			}
-		}
-
-		k++ ;
-
-		if(textData[i] & 8)
-		{
-			if(imageData[k] & 1)
-			{
-				//Already a 1
-			}
-			else
+            else //RGB LSB is a 0
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
 		}
-		else
+        else //Bit is a 0
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is a 1
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
-			else
+            else //RGB LSB is also a 0
 			{
-				//Already a 0
+                //Already a 0 do nothing
 			}
 		}
 
-		k++ ;
+        k++ ; //Next RGB byte
 
-		if(textData[i] & 4)
+        if(textData[i] & 16) //Is the forth Bit a 1
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is also a 1
 			{
-				//Already a 1
+                //Already a 1 do nothing
 			}
-			else
-			{
-				imageData[k] ^= 1 << 0 ;
-			}
-		}
-		else
-		{
-			if(imageData[k] & 1)
-			{
-				imageData[k] ^= 1 << 0 ;
-			}
-			else
-			{
-				//Already a 0
-			}
-		}
-
-		k++ ;
-
-		if(textData[i] & 2)
-		{
-			if(imageData[k] & 1)
-			{
-				//Already a 1
-			}
-			else
+            else //RGB LSB is a 0
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
 		}
-		else
+        else //Bit is a 0
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is a 1
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
-			else
+            else //RGB LSB is also a 0
 			{
-				//Already a 0
+                //Already a 0 do nothing
 			}
 		}
 
-		k++ ;
+        k++ ; //Next RGB byte
 
-		if(textData[i] & 1)
+        if(textData[i] & 8) //Is the fith Bit a 1
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is also a 1
 			{
-				//Already a 1
+                //Already a 1 do nothing
 			}
-			else
+            else //RGB LSB is a 0
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
 		}
-		else
+        else //Bit is a 0
 		{
-			if(imageData[k] & 1)
+            if(imageData[k] & 1) //RGB LSB is a 1
 			{
 				imageData[k] ^= 1 << 0 ;
 			}
-			else
+            else //RGB LSB is also a 0
 			{
-				//Already a 0
+                //Already a 0 do nothing
 			}
 		}
 
-		k++ ;
+        k++ ; //Next RGB byte
+
+        if(textData[i] & 4) //Is the sixth Bit a 1
+		{
+            if(imageData[k] & 1) //RGB LSB is also a 1
+			{
+                //Already a 1 do nothing
+			}
+            else //RGB LSB is a 0
+			{
+				imageData[k] ^= 1 << 0 ;
+			}
+		}
+        else //Bit is a 0
+		{
+            if(imageData[k] & 1) //RGB LSB is a 1
+			{
+				imageData[k] ^= 1 << 0 ;
+			}
+            else //RGB LSB is also a 0
+			{
+                //Already a 0 do nothing
+			}
+		}
+
+        k++ ; //Next RGB byte
+
+        if(textData[i] & 2) //Is the seventh Bit a 1
+		{
+            if(imageData[k] & 1) //RGB LSB is also a 1
+			{
+                //Already a 1 do nothing
+			}
+            else //RGB LSB is a 0
+			{
+				imageData[k] ^= 1 << 0 ;
+			}
+		}
+        else //Bit is a 0
+		{
+            if(imageData[k] & 1) //RGB LSB is a 1
+			{
+				imageData[k] ^= 1 << 0 ;
+			}
+            else //RGB LSB is also a 0
+			{
+                //Already a 0 do nothing
+			}
+		}
+
+        k++ ; //Next RGB byte
+
+        if(textData[i] & 1) //Is the eighth Bit a 1
+		{
+            if(imageData[k] & 1) //RGB LSB is also a 1
+			{
+                //Already a 1 do nothing
+			}
+            else //RGB LSB is a 0
+			{
+				imageData[k] ^= 1 << 0 ;
+			}
+		}
+        else //Bit is a 0
+		{
+            if(imageData[k] & 1) //RGB LSB is a 1
+			{
+				imageData[k] ^= 1 << 0 ;
+			}
+            else //RGB LSB is also a 0
+			{
+                //Already a 0 do nothing
+			}
+		}
+
+        k++ ; //Next RGB byte
 	}
 
 	/*for(int i = 0 ; i < 100 ; i++)
@@ -264,12 +264,12 @@ void LSB::extractSteganography(ImageFile* image , const char *messageFileName)
 	textData = (unsigned char*)malloc(image->getImageSize() * sizeof(unsigned char)) ;
 	imageData = image->getImage() ;
 
-	for(int i = 0 ; i < image->getImageSize() ; i++)
+    for(int i = 0 ; i < image->getImageSize() ; i++) //Initilize the text data to 0
 	{
 		textData[i] = 0 ;
 	}
 
-	for(int i = 0 ; i < (image->getImageSize() /8) ; i++)
+    for(int i = 0 ; i < (image->getImageSize() /8) ; i++) //Each loop makes one char from 8 LSB's
 	{
 		if(imageData[k] & 1)
 		{
