@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "LSB.h"
 #include "LSB_1_2_3.h"
+#include "LSB_1_3_4.h"
 
 namespace Ui {
 class SteganographyWindow;

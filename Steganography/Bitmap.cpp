@@ -73,8 +73,6 @@ ImageFile* Bitmap::bitmapFileLoader(const char* imagePathway)
 		bitmapImage[imageIdx + 2] = tempRGB ;
 	}
 
-    printf("%d\n" , bitmapInfoHeader.biSize) ;
-
 	// close the file and return the bitmap image data
 	fclose(filePtr) ;
 
