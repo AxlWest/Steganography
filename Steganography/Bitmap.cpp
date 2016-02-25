@@ -73,6 +73,8 @@ ImageFile* Bitmap::bitmapFileLoader(const char* imagePathway)
 		bitmapImage[imageIdx + 2] = tempRGB ;
 	}
 
+    printf("%d\n" , bitmapInfoHeader.biSize) ;
+
 	// close the file and return the bitmap image data
 	fclose(filePtr) ;
 
@@ -95,6 +97,15 @@ int Bitmap::bitmapFileSaver(char* fileName , int width , int height , unsigned c
     int				 imageIdx;	// used for swapping RGB->BGR
     unsigned char	 tempRGB;			// used for swapping
 
+    int add = 4 - ((width * 3)%4) ; //Work out bytes to add at end of line for line padding
+
+    if(add == 4)
+    {
+        add = 0 ;
+    }
+
+    int size = ((width * 3) + add) * height ; //Calculate size of image with padding
+
     // open file for writing binary mode
     filePtr = fopen(fileName, "wb");
     if (!filePtr)
@@ -112,7 +123,7 @@ int Bitmap::bitmapFileSaver(char* fileName , int width , int height , unsigned c
     bitmapInfoHeader.biPlanes = 1;
     bitmapInfoHeader.biBitCount = 24;						// 24-bit
     bitmapInfoHeader.biCompression = 0 ;//BI_RGB;				// no compression
-    bitmapInfoHeader.biSizeImage = width * abs(height) * 3;	// width * height * (RGB bytes)
+    bitmapInfoHeader.biSizeImage = size ;
     bitmapInfoHeader.biXPelsPerMeter = 0;
     bitmapInfoHeader.biYPelsPerMeter = 0;
     bitmapInfoHeader.biClrUsed = 0;
