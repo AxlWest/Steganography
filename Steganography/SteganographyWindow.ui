@@ -80,6 +80,11 @@
      <string>LSB 2:0;0</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>LSB 3:0:0</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLineEdit" name="StegoLineEdit">
    <property name="geometry">

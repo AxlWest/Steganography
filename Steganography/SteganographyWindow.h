@@ -7,6 +7,7 @@
 #include "LSB_1_2_3.h"
 #include "LSB_1_3_4.h"
 #include "LSB_2_0_0.h"
+#include "LSB_3_0_0.h"
 
 namespace Ui {
 class SteganographyWindow;

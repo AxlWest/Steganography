@@ -126,6 +126,11 @@
      <string>LSB 2:0:0</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>LSB 3:0:0</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
