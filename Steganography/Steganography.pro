@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     ImageFile.cpp \
     Bitmap.cpp \
     LSB_1_2_3.cpp \
-    LSB_1_3_4.cpp
+    LSB_1_3_4.cpp \
+    LSB_1_0_0.cpp \
+    LSB_2_0_0.cpp
 
 HEADERS  += MainWindow.h \
     SteganographyWindow.h \
@@ -29,7 +31,9 @@ HEADERS  += MainWindow.h \
     ImageFile.h \
     Bitmap.h \
     LSB_1_2_3.h \
-    LSB_1_3_4.h
+    LSB_1_3_4.h \
+    LSB_1_0_0.h \
+    LSB_2_0_0.h
 
 FORMS    += MainWindow.ui \
     SteganographyWindow.ui \
