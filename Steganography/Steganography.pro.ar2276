@@ -25,11 +25,7 @@ SOURCES += main.cpp\
     LSB_2_0_0.cpp \
     LSB_3_0_0.cpp \
     LSB_4_0_0.cpp \
-    LSB_0_1_0.cpp \
-    LSB_0_2_0.cpp \
-    LSB_0_3_0.cpp \
-    LSB_0_4_0.cpp \
-    LSB_0_0_1.cpp
+    LSB_0_1_0.cpp
 
 HEADERS  += MainWindow.h \
     SteganographyWindow.h \
@@ -43,11 +39,7 @@ HEADERS  += MainWindow.h \
     LSB_2_0_0.h \
     LSB_3_0_0.h \
     LSB_4_0_0.h \
-    LSB_0_1_0.h \
-    LSB_0_2_0.h \
-    LSB_0_3_0.h \
-    LSB_0_4_0.h \
-    LSB_0_0_1.h
+    LSB_0_1_0.h
 
 FORMS    += MainWindow.ui \
     SteganographyWindow.ui \

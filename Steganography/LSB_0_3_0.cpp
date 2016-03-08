@@ -1,24 +1,23 @@
-#include "LSB_3_0_0.h"
+#include "LSB_0_3_0.h"
 #include "ImageFile.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-
-LSB_3_0_0::LSB_3_0_0()
+LSB_0_3_0::LSB_0_3_0()
 {
 
 }
 
-LSB_3_0_0::~LSB_3_0_0()
+LSB_0_3_0::~LSB_0_3_0()
 {
 
 }
 
-ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messagePathway)
+ImageFile* LSB_0_3_0::proformSteganography(ImageFile* image , const char *messagePathway)
 {
     FILE* file = NULL ;
-    unsigned int k = 0 ;
+    unsigned int k = 1 ;
     unsigned int fileSize = 0 ;
     unsigned char* textData = NULL ;
     unsigned char* imageData = NULL ;
@@ -47,7 +46,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
     {
         if(textData[i] & 128) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -58,7 +57,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -68,9 +67,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 64) //Is the second Bit a 1
+        if(textData[i] & 64) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -93,7 +92,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 32) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -114,13 +113,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
-        if(textData[i] & 16) //Is the second Bit a 1
+        if(textData[i] & 16) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -131,7 +130,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -143,7 +142,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 8) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -164,9 +163,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 4) //Is the second Bit a 1
+        if(textData[i] & 4) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -187,13 +186,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
         if(textData[i] & 2) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -204,7 +203,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -214,9 +213,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 1) //Is the second Bit a 1
+        if(textData[i] & 1) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -237,18 +236,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(i < fileSize) //Check to see if all the data has been hidden
+        if(textData[i] & 128) //Is the first Bit a 1
         {
-            i++ ; //Increment the loop counter by 1 (Start retreving data from the next char in
-        }
-        else //There is no more data left to hide
-        {
-            break ; //Break out of the loop
-        }
-
-        if(textData[i] & 128) //Is the second Bit a 1
-        {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -269,13 +259,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
         if(textData[i] & 64) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -286,7 +276,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -296,9 +286,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 32) //Is the second Bit a 1
+        if(textData[i] & 32) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -321,7 +311,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 16) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -342,13 +332,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
-        if(textData[i] & 8) //Is the second Bit a 1
+        if(textData[i] & 8) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -359,7 +349,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -371,7 +361,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 4) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -392,9 +382,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 2) //Is the second Bit a 1
+        if(textData[i] & 2) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -415,13 +405,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
         if(textData[i] & 1) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -432,7 +422,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -442,18 +432,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(i < fileSize) //Check to see if all the data has been hidden
+        if(textData[i] & 128) //Is the first Bit a 1
         {
-            i++ ; //Increment the loop counter by 1 (Start retreving data from the next char in
-        }
-        else //There is no more data left to hide
-        {
-            break ; //Break out of the loop
-        }
-
-        if(textData[i] & 128) //Is the second Bit a 1
-        {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -474,9 +455,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 64) //Is the second Bit a 1
+        if(textData[i] & 62) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -497,13 +478,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
         if(textData[i] & 32) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -514,7 +495,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -524,9 +505,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 16) //Is the second Bit a 1
+        if(textData[i] & 16) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -549,7 +530,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 8) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -570,13 +551,13 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
 
-        if(textData[i] & 4) //Is the second Bit a 1
+        if(textData[i] & 4) //Is the first Bit a 1
         {
-            if(imageData[k] & 1) //Red byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -587,7 +568,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 1) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
                 imageData[k] ^= 1 << 0 ;
             }
@@ -599,7 +580,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 2) //Is the first Bit a 1
         {
-            if(imageData[k] & 2) //Red byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -620,9 +601,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        if(textData[i] & 1) //Is the second Bit a 1
+        if(textData[i] & 1) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Red byte LSB is also a 1
+            if(imageData[k] & 4) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
@@ -643,10 +624,9 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Green)
         k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
-
+        k++ ; //Next byte (Green)
     }
 
     image->setImage(imageData) ;
@@ -654,12 +634,12 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
     return image ;
 }
 
-void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileName)
+void LSB_0_3_0::extractSteganography(ImageFile* image , const char *messageFileName)
 {
     FILE* file = NULL ;
     unsigned char* textData = NULL ;
     unsigned char* imageData = NULL ;
-    int k = 0 ;
+    int k = 1 ;
 
     textData = 0 ;
 
@@ -673,7 +653,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
 
     for(int i = 0 ; i < (image->getImageSize() /8) ; i++) //Each loop makes one char from 8 LSB's
     {
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 7 ;
         }
@@ -682,7 +662,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 7 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 6 ;
         }
@@ -691,7 +671,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 6 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 5 ;
         }
@@ -700,11 +680,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 5 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 4 ;
         }
@@ -713,7 +693,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 4 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 3 ;
         }
@@ -722,7 +702,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 3 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 2 ;
         }
@@ -731,11 +711,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 2 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 1 ;
         }
@@ -744,7 +724,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 1 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 0 ;
         }
@@ -753,16 +733,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 0 ;
         }
 
-        if(i < (image->getImageSize() /8)) //Check to see if all the data has been retrived
-        {
-            i++ ; //Increment the loop counter by 1 (Start retreving data from the next RGB set)
-        }
-        else //There is no more data left to be retrived
-        {
-            break ; //Break out of the loop
-        }
-
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 7 ;
         }
@@ -771,11 +742,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 7 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 6 ;
         }
@@ -784,7 +755,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 6 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 5 ;
         }
@@ -793,7 +764,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 5 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 4 ;
         }
@@ -802,11 +773,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 4 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 3 ;
         }
@@ -815,7 +786,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 3 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 2 ;
         }
@@ -824,7 +795,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 2 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 1 ;
         }
@@ -833,11 +804,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 1 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 0 ;
         }
@@ -846,16 +817,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 0 ;
         }
 
-        if(i < (image->getImageSize() /8)) //Check to see if all the data has been retrived
-        {
-            i++ ; //Increment the loop counter by 1 (Start retreving data from the next RGB set)
-        }
-        else //There is no more data left to be retrived
-        {
-            break ; //Break out of the loop
-        }
-
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 7 ;
         }
@@ -864,7 +826,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 7 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 6 ;
         }
@@ -873,11 +835,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 6 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 5 ;
         }
@@ -886,7 +848,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 5 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 4 ;
         }
@@ -895,7 +857,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 4 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 3 ;
         }
@@ -904,11 +866,11 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 3 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
 
-        if(imageData[k] & 1) //Red LSB
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 2 ;
         }
@@ -917,7 +879,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 2 ;
         }
 
-        if(imageData[k] & 2) //Red LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 1 ;
         }
@@ -926,7 +888,7 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 1 ;
         }
 
-        if(imageData[k] & 4) //Red LSB
+        if(imageData[k] & 4) //Green LSB
         {
             textData[i] |= 1 << 0 ;
         }
@@ -935,9 +897,10 @@ void LSB_3_0_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 0 ;
         }
 
-        k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+        k++ ; //Next RGB byte (Green)
+
     }
 
     if(messageFileName != NULL)

@@ -85,6 +85,31 @@
      <string>LSB 3:0:0</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>LSB 4:0:0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>LSB 0:1:0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>LSB 0:2:0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>LSB 0:3:0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>LSB 0:4:0</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLineEdit" name="StegoLineEdit">
    <property name="geometry">
