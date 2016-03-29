@@ -243,6 +243,8 @@ ImageFile* LSB_2_0_0::proformSteganography(ImageFile* image , const char *messag
         k++ ; //Next byte (Red)
     }
 
+    this->addEnding(image , k);
+
     image->setImage(imageData) ;
 
     return image ;
@@ -254,6 +256,7 @@ void LSB_2_0_0::extractSteganography(ImageFile* image , const char *messageFileN
     unsigned char* textData = NULL ;
     unsigned char* imageData = NULL ;
     int k = 0 ;
+    int end = 0 ;
 
     textData = 0 ;
 
@@ -354,6 +357,20 @@ void LSB_2_0_0::extractSteganography(ImageFile* image , const char *messageFileN
         k++ ; //Next RGB byte (Green)
         k++ ; //Next RGB byte (Blue)
         k++ ; //Next RGB byte (Red)
+
+        if(textData[i] == '=' || textData[i] == '<' || textData[i] == 'E' || textData[i] == 'N' || textData[i] == 'D' || textData[i] == '!' || textData[i] == '>')
+        {
+            end++ ;
+        }
+        else
+        {
+            end = 0 ;
+        }
+
+        if(end == 8)
+        {
+            break ;
+        }
     }
 
     if(messageFileName != NULL)
@@ -368,4 +385,725 @@ void LSB_2_0_0::extractSteganography(ImageFile* image , const char *messageFileN
     fwrite(textData , sizeof(unsigned char) , image->getImageSize() , file) ;
 
     fclose(file) ;
+}
+
+void LSB_2_0_0::addEnding(ImageFile *image , int k)
+{
+    //=<END!>=
+
+    unsigned char* imageData = NULL ;
+
+    imageData = image->getImage() ;
+
+    //Store the =
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the <
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the E
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the N
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the D
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the !
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the >
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    //Store the =
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 }

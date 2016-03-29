@@ -11,4 +11,6 @@ class LSB_1_2_3
 
         ImageFile* proformSteganography(ImageFile* image , const char* messagePathway) ;
         void extractSteganography(ImageFile* image , const char* messageFileName) ;
+
+        void addEnding(ImageFile* image , int k) ;
 } ;

@@ -2,17 +2,15 @@
 
 class ImageFile ;
 
-class LSB
+class LSB_0_0_2
 {
-	public :
+    public :
 
-		LSB(void) ; //Constructor
-		~LSB(void) ; //Destructor
+        LSB_0_0_2() ;
+        ~LSB_0_0_2() ;
 
         ImageFile* proformSteganography(ImageFile* image , const char* messagePathway) ;
         void extractSteganography(ImageFile* image , const char* messageFileName) ;
 
         void addEnding(ImageFile* image , int k) ;
-
-		bool prayItFits(unsigned int imageSize , unsigned int textSize) ;
 } ;

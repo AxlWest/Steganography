@@ -648,6 +648,7 @@ void LSB_1_2_3::extractSteganography(ImageFile* image , const char *messageFileN
     unsigned char* textData = NULL ;
     unsigned char* imageData = NULL ;
     int k = 0 ;
+    int end = 0 ;
 
     textData = 0 ;
 
@@ -750,6 +751,20 @@ void LSB_1_2_3::extractSteganography(ImageFile* image , const char *messageFileN
             break ; //Break out of the loop
         }
 
+        if(textData[i] == '=' || textData[i] == '<' || textData[i] == 'E' || textData[i] == 'N' || textData[i] == 'D' || textData[i] == '!' || textData[i] == '>')
+        {
+            end++ ;
+        }
+        else
+        {
+            end = 0 ;
+        }
+
+        if(end == 8)
+        {
+            break ;
+        }
+
         if(imageData[k] & 2)
         {
             textData[i] |= 1 << 7 ;
@@ -839,6 +854,20 @@ void LSB_1_2_3::extractSteganography(ImageFile* image , const char *messageFileN
             break ; //Break out of the loop
         }
 
+        if(textData[i] == '=' || textData[i] == '<' || textData[i] == 'E' || textData[i] == 'N' || textData[i] == 'D' || textData[i] == '!' || textData[i] == '>')
+        {
+            end++ ;
+        }
+        else
+        {
+            end = 0 ;
+        }
+
+        if(end == 8)
+        {
+            break ;
+        }
+
         if(imageData[k] & 2) //Blue second LSB
         {
             textData[i] |= 1 << 7 ;
@@ -918,6 +947,20 @@ void LSB_1_2_3::extractSteganography(ImageFile* image , const char *messageFileN
         }
 
         k++ ; //Next RGB byte (Red)
+
+        if(textData[i] == '=' || textData[i] == '<' || textData[i] == 'E' || textData[i] == 'N' || textData[i] == 'D' || textData[i] == '!' || textData[i] == '>')
+        {
+            end++ ;
+        }
+        else
+        {
+            end = 0 ;
+        }
+
+        if(end == 8)
+        {
+            break ;
+        }
     }
 
     if(messageFileName != NULL)

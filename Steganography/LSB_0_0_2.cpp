@@ -1,23 +1,21 @@
-#include "LSB_0_4_0.h"
+#include "LSB_0_0_2.h"
 #include "ImageFile.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-LSB_0_4_0::LSB_0_4_0()
+LSB_0_0_2::LSB_0_0_2()
 {
-
 }
 
-LSB_0_4_0::~LSB_0_4_0()
+LSB_0_0_2::~LSB_0_0_2()
 {
-
 }
 
-ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messagePathway)
+ImageFile* LSB_0_0_2::proformSteganography(ImageFile* image , const char *messagePathway)
 {
     FILE* file = NULL ;
-    unsigned int k = 1 ;
+    unsigned int k = 2 ;
     unsigned int fileSize = 0 ;
     unsigned char* textData = NULL ;
     unsigned char* imageData = NULL ;
@@ -90,22 +88,26 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
+        k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
+
         if(textData[i] & 32) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Green byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
             else //Red byte LSB is a 0
             {
-                imageData[k] ^= 1 << 2 ;
+                imageData[k] ^= 1 << 0 ;
             }
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 4) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
-                imageData[k] ^= 1 << 2 ;
+                imageData[k] ^= 1 << 0 ;
             }
             else //Red byte is also a 0
             {
@@ -115,20 +117,20 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 16) //Is the first Bit a 1
         {
-            if(imageData[k] & 8) //Green byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
             else //Red byte LSB is a 0
             {
-                imageData[k] ^= 1 << 3 ;
+                imageData[k] ^= 1 << 1 ;
             }
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 8) //Red byte LSB is a 1
+            if(imageData[k] & 2) //Red byte LSB is a 1
             {
-                imageData[k] ^= 1 << 3 ;
+                imageData[k] ^= 1 << 1 ;
             }
             else //Red byte is also a 0
             {
@@ -136,9 +138,9 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
         k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
 
         if(textData[i] & 8) //Is the first Bit a 1
         {
@@ -186,22 +188,26 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
+        k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
+
         if(textData[i] & 2) //Is the first Bit a 1
         {
-            if(imageData[k] & 4) //Green byte LSB is also a 1
+            if(imageData[k] & 1) //Green byte LSB is also a 1
             {
                 //Already a 1 do nothing
             }
             else //Red byte LSB is a 0
             {
-                imageData[k] ^= 1 << 2 ;
+                imageData[k] ^= 1 << 0 ;
             }
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 4) //Red byte LSB is a 1
+            if(imageData[k] & 1) //Green byte LSB is a 1
             {
-                imageData[k] ^= 1 << 2 ;
+                imageData[k] ^= 1 << 0 ;
             }
             else //Red byte is also a 0
             {
@@ -211,20 +217,20 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
 
         if(textData[i] & 1) //Is the first Bit a 1
         {
-            if(imageData[k] & 8) //Green byte LSB is also a 1
+            if(imageData[k] & 2) //Green second LSB bit is also a 1
             {
                 //Already a 1 do nothing
             }
             else //Red byte LSB is a 0
             {
-                imageData[k] ^= 1 << 3 ;
+                imageData[k] ^= 1 << 1 ;
             }
         }
         else //Bit is a 0
         {
-            if(imageData[k] & 8) //Red byte LSB is a 1
+            if(imageData[k] & 2) //Red byte LSB is a 1
             {
-                imageData[k] ^= 1 << 3 ;
+                imageData[k] ^= 1 << 1 ;
             }
             else //Red byte is also a 0
             {
@@ -232,9 +238,9 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
             }
         }
 
-        k++ ; //Next byte (Blue)
         k++ ; //Next byte (Red)
         k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
     }
 
     image->setImage(imageData) ;
@@ -242,12 +248,12 @@ ImageFile* LSB_0_4_0::proformSteganography(ImageFile* image , const char *messag
     return image ;
 }
 
-void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileName)
+void LSB_0_0_2::extractSteganography(ImageFile* image , const char *messageFileName)
 {
     FILE* file = NULL ;
     unsigned char* textData = NULL ;
     unsigned char* imageData = NULL ;
-    int k = 1 ;
+    int k = 2 ;
     int end = 0 ;
 
     textData = 0 ;
@@ -280,7 +286,11 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 6 ;
         }
 
-        if(imageData[k] & 4) //Green LSB
+        k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
+
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 5 ;
         }
@@ -289,7 +299,7 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 5 ;
         }
 
-        if(imageData[k] & 8) //Green LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 4 ;
         }
@@ -298,9 +308,9 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 4 ;
         }
 
-        k++ ; //Next RGB byte (Blue)
-        k++ ; //Next RGB byte (Red)
-        k++ ; //Next RGB byte (Green)
+        k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
 
         if(imageData[k] & 1) //Green LSB
         {
@@ -320,7 +330,11 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 2 ;
         }
 
-        if(imageData[k] & 4) //Green LSB
+        k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
+
+        if(imageData[k] & 1) //Green LSB
         {
             textData[i] |= 1 << 1 ;
         }
@@ -329,7 +343,7 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 1 ;
         }
 
-        if(imageData[k] & 8) //Green LSB
+        if(imageData[k] & 2) //Green LSB
         {
             textData[i] |= 1 << 0 ;
         }
@@ -338,9 +352,9 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
             textData[i] ^= 0 << 0 ;
         }
 
-        k++ ; //Next RGB byte (Blue)
-        k++ ; //Next RGB byte (Red)
-        k++ ; //Next RGB byte (Green)
+        k++ ; //Next byte (Red)
+        k++ ; //Next byte (Green)
+        k++ ; //Next byte (Blue)
 
         if(textData[i] == '=' || textData[i] == '<' || textData[i] == 'E' || textData[i] == 'N' || textData[i] == 'D' || textData[i] == '!' || textData[i] == '>')
         {
@@ -371,7 +385,7 @@ void LSB_0_4_0::extractSteganography(ImageFile* image , const char *messageFileN
     fclose(file) ;
 }
 
-void LSB_0_4_0::addEnding(ImageFile *image , int k)
+void LSB_0_0_2::addEnding(ImageFile *image , int k)
 {
     //=<END!>=
 
@@ -398,28 +412,9 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 4)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 2 ;
-    }
-
-
-    if(imageData[k] & 8)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 3 ;
-    }
-
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -439,27 +434,53 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the <
     if(imageData[k] & 1)
@@ -480,27 +501,9 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 4)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 2 ;
-    }
-
-    if(imageData[k] & 8)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 3 ;
-    }
-
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -520,27 +523,53 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the E
     if(imageData[k] & 1)
@@ -561,27 +590,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -601,27 +634,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the N
     if(imageData[k] & 1)
@@ -642,27 +679,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -682,27 +723,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the D
     if(imageData[k] & 1)
@@ -723,27 +768,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -763,27 +812,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the !
     if(imageData[k] & 1)
@@ -795,7 +848,7 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 22)
+    if(imageData[k] & 2)
     {
         imageData[k] ^= 1 << 1 ;
     }
@@ -804,27 +857,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -844,27 +901,31 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the >
     if(imageData[k] & 1)
@@ -885,27 +946,9 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 4)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 2 ;
-    }
-
-    if(imageData[k] & 8)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 3 ;
-    }
-
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -925,27 +968,53 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 2 ;
+        imageData[k] ^= 1 << 0 ;
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
-        imageData[k] ^= 1 << 3 ;
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        imageData[k] ^= 1 << 1 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     //Store the =
     if(imageData[k] & 1)
@@ -966,27 +1035,9 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 4)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 2 ;
-    }
-
-    if(imageData[k] & 8)
-    {
-        //Already a 1 do nothing
-    }
-    else //RGB LSB is a 0
-    {
-        imageData[k] ^= 1 << 3 ;
-    }
-
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 
     if(imageData[k] & 1)
     {
@@ -1006,25 +1057,51 @@ void LSB_0_4_0::addEnding(ImageFile *image , int k)
         imageData[k] ^= 1 << 1 ;
     }
 
-    if(imageData[k] & 4)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
     {
-        imageData[k] ^= 1 << 2 ;
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    if(imageData[k] & 2)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 1 ;
+    }
+
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
     }
     else //RGB LSB is a 0
     {
         //Already a 0 do nothing
     }
 
-    if(imageData[k] & 8)
+    if(imageData[k] & 2)
     {
         //Already a 1 do nothing
     }
     else //RGB LSB is a 0
     {
-        imageData[k] ^= 1 << 3 ;
+        imageData[k] ^= 1 << 1 ;
     }
 
-    k++ ; //Next byte (Red)
-    k++ ; //Next byte (Green)
-    k++ ; //Next byte (Blue)
+    k++ ; //Next RGB byte (Blue)
+    k++ ; //Next RGB byte (Red)
+    k++ ; //Next RGB byte (Green)
 }

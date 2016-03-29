@@ -15,6 +15,7 @@ LSB::~LSB(void)
 ImageFile* LSB::proformSteganography(ImageFile* image , const char *messagePathway)
 {
 	FILE* file = NULL ;
+    int i = 0 ;
 	unsigned int k = 0 ;
 	unsigned int fileSize = 0 ;
 	unsigned char* textData = NULL ;
@@ -37,9 +38,9 @@ ImageFile* LSB::proformSteganography(ImageFile* image , const char *messagePathw
 
 	fclose(file) ;
 
-	imageData = image->getImage() ;
+    imageData = image->getImage() ;
 
-    for(int i = 0 ; i < fileSize ; i++) //Each loop hides one letter in 8 LSB's
+    for(i ; i < fileSize ; i++) //Each loop hides one letter in 8 LSB's
 	{
         if(textData[i] & 128) //Is the first Bit a 1
 		{
@@ -242,10 +243,7 @@ ImageFile* LSB::proformSteganography(ImageFile* image , const char *messagePathw
         k++ ; //Next RGB byte
 	}
 
-	/*for(int i = 0 ; i < 100 ; i++)
-	{
-		printf("%d\n" , imageData[i]) ;
-	}*/
+    this->addEnding(image , k);
 
 	image->setImage(imageData) ;
 
@@ -258,6 +256,7 @@ void LSB::extractSteganography(ImageFile* image , const char *messageFileName)
 	unsigned char* textData = NULL ;
 	unsigned char* imageData = NULL ;
 	int k = 0 ;
+    int end = 0 ;
 
 	textData = 0 ;
 
@@ -358,6 +357,20 @@ void LSB::extractSteganography(ImageFile* image , const char *messageFileName)
 		}
 
 		k++ ;
+
+        if(textData[i] == '=' || textData[i] == '<' || textData[i] == 'E' || textData[i] == 'N' || textData[i] == 'D' || textData[i] == '!' || textData[i] == '>')
+        {
+            end++ ;
+        }
+        else
+        {
+            end = 0 ;
+        }
+
+        if(end == 8)
+        {
+            break ;
+        }
 	}
 
 	if(messageFileName != NULL)
@@ -372,6 +385,727 @@ void LSB::extractSteganography(ImageFile* image , const char *messageFileName)
     fwrite(textData , sizeof(unsigned char) , image->getImageSize() , file) ;
 
 	fclose(file) ;
+}
+
+void LSB::addEnding(ImageFile *image , int k)
+{
+    //=<END!>=
+
+    unsigned char* imageData = NULL ;
+
+    imageData = image->getImage() ;
+
+    //Store the =
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    //Store the <
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    //Store the E
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    //Store the N
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    //Store the D
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    //Store the !
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    //Store the >
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    //Store the =
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+    else //RGB LSB is a 0
+    {
+        //Already a 0 do nothing
+    }
+
+    k++ ;
+
+    if(imageData[k] & 1)
+    {
+        //Already a 1 do nothing
+    }
+    else //RGB LSB is a 0
+    {
+        imageData[k] ^= 1 << 0 ;
+    }
+
+    k++ ;
 }
 
 bool LSB::prayItFits(unsigned int imageSize , unsigned int textSize)
