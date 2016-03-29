@@ -235,6 +235,8 @@ ImageFile* LSB_0_0_4::proformSteganography(ImageFile* image , const char *messag
         k++ ; //Next byte (Blue)
     }
 
+    this->addEnding(image , k) ;
+
     image->setImage(imageData) ;
 
     return image ;

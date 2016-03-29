@@ -234,10 +234,7 @@ ImageFile* LSB_2_2_2::proformSteganography(ImageFile* image , const char *messag
         k++ ; //Next RGB byte
     }
 
-    /*for(int i = 0 ; i < 100 ; i++)
-    {
-        printf("%d\n" , imageData[i]) ;
-    }*/
+    this->addEnding(image , k) ;
 
     image->setImage(imageData) ;
 

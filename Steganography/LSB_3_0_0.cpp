@@ -649,7 +649,7 @@ ImageFile* LSB_3_0_0::proformSteganography(ImageFile* image , const char *messag
 
     }
 
-    this->addEnding(image , k);
+    this->addEnding(image , k) ;
 
     image->setImage(imageData) ;
 
